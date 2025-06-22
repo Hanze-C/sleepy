@@ -13,9 +13,9 @@ global server
 
 # --- config start
 # 密钥
-SECRET = 'YourSecretCannotGuess'
+SECRET = 'HanzeChen'
 # 服务地址, 末尾不加 `/`
-SERVER = 'https://example.com'
+SERVER = 'https://sleepy.hanze.icu'
 # 请求重试次数
 RETRY = 3
 # --- config end

@@ -16,10 +16,10 @@
     'use strict';
 
     // ===== 参数配置 =====
-    const API_URL = 'https://sleepy.wyf9.top/device/set'; // 完整 API 地址（以 /device/set 结尾）
-    const SECRET = '绝对猜不出来的密码';                // 你的 secret
-    const ID = '114514';                               // 设备 id
-    const SHOW_NAME = '';                              // 设备名称，若为空则使用浏览器名称
+    const API_URL = 'https://sleepy.hanze.icu/device/set'; // 完整 API 地址（以 /device/set 结尾）
+    const SECRET = 'HanzeChen';                // 你的 secret
+    const ID = 'PC-1';                               // 设备 id
+    const SHOW_NAME = 'PC-1';                              // 设备名称，若为空则使用浏览器名称
     const NO_TITLE = 'url';                            // 页面标题为空时返回的值：'url' 使用完整 URL, 'host' 使用域名, 其他值则直接使用该值
     const BLACKLIST = ['admin', '后台'];               // 黑名单关键词数组（标题或 URL 包含即停止上报，不区分大小写）
     // 请确保 @connect 指令中的域名与 API_URL 域名一致
