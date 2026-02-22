@@ -1,0 +1,14 @@
+# Python Cache
+__pycache__/
+
+# Env and Data
+.env
+data.json
+
+# For Local / venv
+*.test.*
+*.local.*
+.venv/
+
+# Others
+.vscode/launch.json
