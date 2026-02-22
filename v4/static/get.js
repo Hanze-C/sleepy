@@ -81,51 +81,67 @@ function updateElement(data) {
         statusElement.classList.add(data.info.color);
     }
 
-    // 更新设备状态
-    var deviceStatus = '<hr/><b><p id="device-status"><i>Device</i> Status</p></b>';
-    const devices = Object.values(data.device);
+    // 更新设备状态 - 改为网格卡片形式
+    const deviceStatusContainer = document.getElementById('device-status');
+    if (!deviceStatusContainer) return;
 
-    for (let device of devices) {
-        let device_app;
+    deviceStatusContainer.innerHTML = ''; // 清空容器
+
+    const devices = Object.entries(data.device);
+    
+    if (devices.length === 0) {
+        // 如没有设备，隐藏整个设备区域
+        const devicesSection = document.getElementById('devices-container');
+        if (devicesSection) {
+            devicesSection.style.display = 'none';
+        }
+        return;
+    }
+
+    // 显示设备区域
+    const devicesSection = document.getElementById('devices-container');
+    if (devicesSection) {
+        devicesSection.style.display = 'block';
+    }
+
+    for (let [deviceId, device] of devices) {
         const escapedAppName = escapeHtml(device.app_name);
+        const deviceItem = document.createElement('div');
+        deviceItem.className = 'device-item';
+
+        const deviceName = document.createElement('p');
+        deviceName.className = 'device-name';
+        deviceName.textContent = escapeHtml(device.show_name);
+
+        const appElement = document.createElement('p');
+        appElement.className = 'device-app';
+
         if (device.using) {
             const jsShowName = escapeJs(device.show_name);
             const jsAppName = escapeJs(device.app_name);
-            const jsCode = `alert('${jsShowName}: \\n${jsAppName}')`;
-            const escapedJsCode = escapeHtml(jsCode);
-
-            device_app = `
-<a class="awake" 
-    title="${escapedAppName}" 
-    href="javascript:${escapedJsCode}">
-${sliceText(escapedAppName, data.device_status_slice)}
-</a>`;
+            appElement.className += ' awake';
+            appElement.textContent = sliceText(escapedAppName, data.device_status_slice);
+            appElement.title = escapedAppName;
+            appElement.style.cursor = 'pointer';
+            appElement.onclick = () => {
+                alert(`${jsShowName}: \n${jsAppName}`);
+            };
         } else {
-            device_app = `
-<a class="sleeping">
-${sliceText(escapedAppName, data.device_status_slice)}
-</a>`
+            appElement.className += ' sleeping';
+            appElement.textContent = sliceText(escapedAppName, data.device_status_slice);
+            appElement.title = escapedAppName;
         }
-        deviceStatus += `${escapeHtml(device.show_name)}: ${device_app} <br/>`;
-    }
 
-    if (deviceStatus == '<hr/><b><p id="device-status"><i>Device</i> Status</p></b>') {
-        deviceStatus = '';
-    }
-
-    const deviceStatusElement = document.getElementById('device-status');
-    if (deviceStatusElement) {
-        deviceStatusElement.innerHTML = deviceStatus;
+        deviceItem.appendChild(deviceName);
+        deviceItem.appendChild(appElement);
+        deviceStatusContainer.appendChild(deviceItem);
     }
 
     // 更新最后更新时间
     const timenow = getFormattedDate(new Date());
     if (lastUpdatedElement) {
         lastUpdatedElement.innerHTML = `
-最后更新:
-<a class="awake" 
-title="服务器时区: ${data.timezone}" 
-href="javascript:alert('浏览器最后更新时间: ${timenow}\\n数据最后更新时间 (基于服务器时区): ${data.last_updated}\\n服务端时区: ${data.timezone}')">
+最后更新: <a class="update-time-link" title="服务器时区: ${data.timezone}" href="javascript:alert('浏览器最后更新时间: ${timenow}\\n数据最后更新时间 (基于服务器时区): ${data.last_updated}\\n服务端时区: ${data.timezone}')">
 ${data.last_updated}
 </a>`;
     }
@@ -171,13 +187,13 @@ function reconnectWithDelay(delay) {
     let remainingSeconds = Math.floor(delay / 1000);
     const lastUpdatedElement = document.getElementById('last-updated');
     if (lastUpdatedElement) {
-        lastUpdatedElement.innerHTML = `连接服务器失败，${remainingSeconds} 秒后重新连接... <a href="javascript:reconnectNow();" target="_self" style="color: rgb(0, 255, 0);">立即重连</a>`;
+        lastUpdatedElement.innerHTML = `连接服务器失败，${remainingSeconds} 秒后重新连接... <a href="javascript:reconnectNow();" target="_self" style="color: var(--color-info);">立即重连</a>`;
     }
 
     countdownInterval = setInterval(() => {
         remainingSeconds--;
         if (remainingSeconds > 0 && lastUpdatedElement) {
-            lastUpdatedElement.innerHTML = `连接服务器失败，${remainingSeconds} 秒后重新连接... <a href="javascript:reconnectNow();" target="_self" style="color: rgb(0, 255, 0);">立即重连</a>`;
+            lastUpdatedElement.innerHTML = `连接服务器失败，${remainingSeconds} 秒后重新连接... <a href="javascript:reconnectNow();" target="_self" style="color: var(--color-info);">立即重连</a>`;
         } else if (remainingSeconds <= 0) {
             clearInterval(countdownInterval);
         }
@@ -222,10 +238,9 @@ function setupEventSource() {
     }
 
     // 更新UI状态
-    const statusElement = document.getElementById('status');
     const lastUpdatedElement = document.getElementById('last-updated');
     if (lastUpdatedElement) {
-        lastUpdatedElement.innerHTML = `正在连接服务器... <a href="javascript:location.reload();" target="_self" style="color: rgb(0, 255, 0);">刷新页面</a>`;
+        lastUpdatedElement.innerHTML = `正在连接服务器... <a href="javascript:location.reload();" target="_self" style="color: var(--color-info);">刷新页面</a>`;
     }
 
     // 关闭旧连接
@@ -254,6 +269,7 @@ function setupEventSource() {
         if (data.success) {
             updateElement(data);
         } else {
+            const statusElement = document.getElementById('status');
             if (statusElement) {
                 statusElement.textContent = '[!错误!]';
                 document.getElementById('additional-info').textContent = data.info || '未知错误';
@@ -365,7 +381,7 @@ async function update() {
             let errorinfo = '';
             const statusElement = document.getElementById('status');
             // --- show updating
-            document.getElementById('last-updated').innerHTML = `正在更新状态, 请稍候... <a href="javascript:location.reload();" target="_self" style="color: rgb(0, 255, 0);">刷新页面</a>`;
+            document.getElementById('last-updated').innerHTML = `正在更新状态, 请稍候... <a href="javascript:location.reload();" target="_self" style="color: var(--color-info);">刷新页面</a>`;
             // fetch data
             fetch(baseUrl + 'query', { timeout: 10000 })
                 .then(response => response.json())

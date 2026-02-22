@@ -10,18 +10,25 @@ function saveThemePreference(isDark) {
 
 // 获取主题偏好
 function getThemePreference() {
-    return localStorage.getItem('themePref') || 'auto';
+    return localStorage.getItem('themePref') || 'light';
 }
 
 // 应用主题
 function applyTheme(theme) {
-    document.querySelectorAll('.light, .dark').forEach(el => {
-        if (theme === 'dark' && el.classList.contains('light')) {
-            el.classList.replace('light', 'dark');
-        } else if (theme === 'light' && el.classList.contains('dark')) {
-            el.classList.replace('dark', 'light');
-        }
-    });
+    const isDark = theme === 'dark';
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+}
+
+// 切换主题
+function toggleTheme() {
+    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+    saveThemePreference(newTheme === 'dark');
 }
 
 // ================= 透明度系统 =================
@@ -38,23 +45,16 @@ function applySavedOpacity() {
 document.addEventListener('DOMContentLoaded', () => {
     // 应用保存的主题
     const savedTheme = getThemePreference();
-    if (savedTheme !== 'auto') {
-        applyTheme(savedTheme);
-    }
+    applyTheme(savedTheme);
 
     // 应用保存的透明度
     applySavedOpacity();
-
 });
 
 
 // ================= 主题切换事件 =================
 MLswitch.onclick = function () {
-    document.querySelectorAll('.light, .dark').forEach(el => {
-        el.classList.toggle('light');
-        el.classList.toggle('dark');
-    });
-    saveThemePreference(document.querySelector('.dark') !== null);
+    toggleTheme();
 };
 
 // ================= 滑块交互逻辑 =================
