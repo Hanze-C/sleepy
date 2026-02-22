@@ -90,12 +90,12 @@ button {
 .container {
   width: 100%;
   max-width: 100%;
-  padding: 20px;
+  padding: 32px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
 }
 
 /* ============================================
@@ -133,15 +133,15 @@ button {
 /* 主卡片 */
 .main-card {
   width: 90%;
-  max-width: 560px;
-  padding: 32px 24px;
+  max-width: 720px;
+  padding: 36px 32px;
 }
 
 /* 信息卡片 */
 .info-card {
   width: 90%;
-  max-width: 560px;
-  padding: 24px;
+  max-width: 720px;
+  padding: 28px 32px;
 }
 
 /* ============================================
@@ -150,13 +150,13 @@ button {
 
 .card-header {
   text-align: center;
-  margin-bottom: 28px;
-  padding-bottom: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 18px;
   border-bottom: 2px solid var(--color-light-gray);
 }
 
 .title {
-  font-size: 2.2em;
+  font-size: 2.5em;
   font-weight: 700;
   color: var(--color-black);
   letter-spacing: 2px;
@@ -187,8 +187,8 @@ button {
 
 .status-section {
   text-align: center;
-  margin-bottom: 24px;
-  padding: 16px;
+  margin-bottom: 28px;
+  padding: 20px;
   background: linear-gradient(135deg, rgba(245, 245, 245, 0.5) 0%, rgba(224, 224, 224, 0.3) 100%);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-medium-gray);
@@ -199,12 +199,12 @@ button {
   color: #888;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 
 .status-text {
-  font-size: 1.8em;
+  font-size: 2em;
   font-weight: 700;
   color: var(--color-info);
   display: block;
@@ -220,7 +220,7 @@ button {
   font-size: 0.95em;
   color: #666;
   line-height: 1.6;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 /* ============================================
@@ -228,7 +228,7 @@ button {
    ============================================ */
 
 .devices-section {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .section-title {
@@ -237,20 +237,20 @@ button {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   padding-left: 4px;
 }
 
 .devices-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
-  margin-top: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
 }
 
 .device-item {
   background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-  padding: 12px;
+  padding: 14px;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-medium-gray);
   transition: all var(--transition-base);
@@ -273,7 +273,7 @@ button {
 }
 
 .device-app {
-  font-size: 0.9em;
+  font-size: 0.95em;
   font-weight: 600;
   word-break: break-all;
   cursor: pointer;
@@ -297,8 +297,8 @@ button {
    ============================================ */
 
 .hitokoto-section {
-  margin: 20px 0;
-  padding: 16px;
+  margin: 24px 0;
+  padding: 18px;
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
   border-radius: var(--radius-md);
   border-left: 4px solid var(--color-info);
@@ -309,7 +309,7 @@ button {
 }
 
 #hitokoto_text {
-  font-size: 0.95em;
+  font-size: 1em;
   color: var(--color-dark-gray);
   font-style: italic;
   line-height: 1.6;
@@ -325,8 +325,8 @@ button {
    ============================================ */
 
 .steam-section {
-  margin: 20px 0;
-  padding: 16px;
+  margin: 24px 0;
+  padding: 18px;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-medium-gray);
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.04) 100%);
@@ -365,14 +365,14 @@ button {
    ============================================ */
 
 .footer-section {
-  margin-top: 20px;
-  padding-top: 16px;
+  margin-top: 24px;
+  padding-top: 18px;
   border-top: 1px solid var(--color-light-gray);
   text-align: center;
 }
 
 .update-time {
-  font-size: 0.85em;
+  font-size: 0.9em;
   color: #888;
   margin: 0;
 }
@@ -395,7 +395,7 @@ button {
 }
 
 .footer-text {
-  font-size: 0.9em !important;
+  font-size: 0.95em !important;
   color: #666 !important;
 }
 
@@ -644,8 +644,8 @@ body.dark-mode #slider svg {
 /* 平板设备 */
 @media (max-width: 768px) {
   .container {
-    padding: 16px;
-    gap: 16px;
+    padding: 24px 16px;
+    gap: 20px;
   }
 
   .card {
@@ -655,26 +655,26 @@ body.dark-mode #slider svg {
   .main-card {
     width: 100%;
     max-width: 100%;
-    padding: 24px 16px;
+    padding: 28px 20px;
   }
 
   .info-card {
     width: 100%;
     max-width: 100%;
-    padding: 16px;
+    padding: 20px;
   }
 
   .title {
-    font-size: 1.8em;
+    font-size: 2em;
   }
 
   .devices-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px;
   }
 
   .status-text {
-    font-size: 1.5em;
+    font-size: 1.6em;
   }
 }
 
@@ -685,61 +685,61 @@ body.dark-mode #slider svg {
   }
 
   .container {
-    padding: 12px;
-    gap: 12px;
+    padding: 16px;
+    gap: 16px;
   }
 
   .main-card {
-    padding: 16px;
+    padding: 20px;
   }
 
   .info-card {
-    padding: 12px;
+    padding: 16px;
   }
 
   .card-header {
-    margin-bottom: 16px;
-    padding-bottom: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
   }
 
   .title {
-    font-size: 1.5em;
+    font-size: 1.8em;
     letter-spacing: 1px;
   }
 
   .status-section {
-    padding: 12px;
-    margin-bottom: 16px;
+    padding: 14px;
+    margin-bottom: 18px;
   }
 
   .status-text {
-    font-size: 1.3em;
+    font-size: 1.5em;
   }
 
   .status-desc {
-    font-size: 0.9em;
+    font-size: 0.95em;
   }
 
   .devices-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 10px;
   }
 
   .device-item {
-    padding: 10px;
+    padding: 12px;
   }
 
   .device-name {
-    font-size: 0.7em;
+    font-size: 0.75em;
   }
 
   .device-app {
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
 
   .card-content p {
-    font-size: 0.9em;
-    margin: 6px 0;
+    font-size: 0.95em;
+    margin: 8px 0;
   }
 
   #moonlight,
@@ -762,7 +762,7 @@ body.dark-mode #slider svg {
 /* 超小设备 */
 @media (max-width: 360px) {
   .title {
-    font-size: 1.3em;
+    font-size: 1.5em;
   }
 
   .devices-grid {
@@ -770,7 +770,7 @@ body.dark-mode #slider svg {
   }
 
   .card-content p {
-    font-size: 0.85em;
+    font-size: 0.9em;
   }
 }
 
